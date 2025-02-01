@@ -7,6 +7,7 @@ import router from './routes/taskRoutes';
 dotenv.config(); //env config
 
 const app = express();
+app.use(express.json());
 
 app.use(cors({ //using cors
     origin: process.env.CLIENT_URL,
@@ -14,13 +15,15 @@ app.use(cors({ //using cors
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-app.use(express.json());
 
 
 mongoDB();
 
 app.use('/tasks', router);
 
+app.get('/', (req, res) => {
+    res.send('hello world');
+});
 
 
 const PORT = process.env.PORT || 6969;
