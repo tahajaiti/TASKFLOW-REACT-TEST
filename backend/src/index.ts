@@ -21,8 +21,8 @@ mongoDB();
 
 app.use('/tasks', router);
 
-app.get('/', (req, res) => {
-    res.send('hello world');
+app.use('*', (_, res) => {
+    res.status(404).send('Route not found');
 });
 
 
