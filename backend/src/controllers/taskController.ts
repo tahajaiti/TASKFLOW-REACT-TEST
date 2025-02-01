@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
+import { validationResult } from "express-validator";
 import Task from "../models/Task";
+
 
 export const getAll = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -28,6 +30,13 @@ export const getById = async (req: Request, res: Response): Promise<void> => {
 
 export const createTask = async (req: Request, res: Response): Promise<void> => {
     try {
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            res.status(400).json({ errors: errors.array() });
+            return;
+        }
+
         const task = new Task(req.body);
         await task.save();
         res.status(201).json(task);
