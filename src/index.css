@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+body {
+    @apply bg-gray-500 text-white;
+}
+
+.card {
+    @apply my-4 text-gray-700 flex w-[95%] cursor-pointer flex-col rounded-[15px] border shadow-xl transition-all active:scale-[0.95];
+}
+
+.left-tag {
+    @apply flex h-full w-1/2 justify-center rounded-bl-[15px] rounded-tr-[15px] p-1 text-xl text-black;
+}
+.right-tag {
+    @apply flex h-full w-1/4 justify-center rounded-br-[15px] rounded-tl-[15px] p-1 text-xl text-black;
+}
+
+.input-s {
+    @apply h-fit w-full rounded-md border bg-gray-800 p-2 text-white;
+}
+
+.addForm{
+    @apply flex flex-row items-center mb-3 flex-wrap gap-2 bg-slate-400 p-2 rounded-md border border-y-gray-950 shadow-xl;
+}
+
+.btn-primary {
+    @apply flex w-[8rem] cursor-pointer items-center rounded-full border bg-gray-700 pl-2 text-[1.2rem] font-medium text-white shadow-lg transition-all duration-200 hover:scale-105 hover:bg-white hover:text-gray-700 active:scale-[0.98] active:bg-gray-600 active:text-white;
+}
