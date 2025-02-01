@@ -6,9 +6,16 @@
     "mongoose": "^8.9.6"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
+  },
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
