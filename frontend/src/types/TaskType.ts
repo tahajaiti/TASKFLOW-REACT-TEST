@@ -1,4 +1,4 @@
-interface TaskType {
+export interface TaskType {
     _id: number;
     title: string;
     description: string;
@@ -8,4 +8,8 @@ interface TaskType {
     updatedAt: Date;
 }
 
-export default TaskType;
+export type taskState = {
+    tasks: TaskType[];
+    loading: boolean;
+    error: string;
+} 
