@@ -42,6 +42,7 @@ const taskSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
+
         //fetch tasks
         .addCase(fetchTasks.pending, (state) => {
             state.loading = true;
@@ -54,6 +55,38 @@ const taskSlice = createSlice({
             state.loading = false;
             state.error = action.error.message || "Failed to fetch tasks";
         })
+
+        //fetch by id
+        .addCase(fetchById.pending, (state) => {
+            state.loading = true;
+        })
+        .addCase(fetchById.fulfilled, (state, action: PayloadAction<TaskType>) => {
+            state.loading = false;
+            state.tasks = [action.payload];
+        })
+        .addCase(fetchById.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message || "Failed to fetch task";
+        })
+
+        //add task
+        .addCase(addTask.fulfilled, (state, action: PayloadAction<TaskType>) => {
+            state.loading = false;
+            state.tasks.push(action.payload);
+        })
+
+        //delete task
+        .addCase(deleteTask.fulfilled, (state, action: PayloadAction<number>) => {
+            state.tasks = state.tasks.filter((task) => task._id !== action.payload);
+        })
+
+        //update task
+        .addCase(updateTask.fulfilled, (state, action: PayloadAction<TaskType>) => {
+            const index = state.tasks.findIndex((task) => task._id === action.payload._id);
+            if(index !== -1) {
+                state.tasks[index] = action.payload;
+            }
+        });
     }
 });
 
