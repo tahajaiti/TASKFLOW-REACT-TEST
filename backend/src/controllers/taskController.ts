@@ -67,7 +67,7 @@ export const deleteTask = async (req: Request, res: Response): Promise<void> => 
             res.status(404).json({ message: "Task not found" });
             return;
         }
-        res.status(204).send();
+        res.status(204).json(deletedTask);
     } catch (error) {
         console.error("Error deleting task:", error);
         res.status(500).json({ message: "Internal server error" });
