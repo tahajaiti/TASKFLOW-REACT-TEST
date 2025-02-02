@@ -1,1 +1,3 @@
-STARTING FROM 0
+# Why
+
+- BECAUSE I CAN
