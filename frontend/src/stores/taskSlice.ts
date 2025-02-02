@@ -16,6 +16,11 @@ export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async () => {
     return response.data;
 });
 
+export const fetchById = createAsyncThunk('tasks/fetchById', async (id: number) => {
+    const response = await axios.get(`${process.env.API_URL}/tasks/${id}`);
+    return response.data;
+});
+
 export const addTask = createAsyncThunk('tasks/addTask', async (task: Omit<TaskType, "_id">) => {
     const response = await axios.post(`${process.env.API_URL}/tasks`, task);
     return response.data;
@@ -34,7 +39,22 @@ export const updateTask = createAsyncThunk('tasks/updateTask', async(task: TaskT
 const taskSlice = createSlice({
     name: "tasks",
     initialState,
-    reducers: {}
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+        //fetch tasks
+        .addCase(fetchTasks.pending, (state) => {
+            state.loading = true;
+        })
+        .addCase(fetchTasks.fulfilled, (state, action: PayloadAction<TaskType[]>) => {
+            state.loading = false;
+            state.tasks = action.payload;
+        })
+        .addCase(fetchTasks.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message || "Failed to fetch tasks";
+        })
+    }
 });
 
 
