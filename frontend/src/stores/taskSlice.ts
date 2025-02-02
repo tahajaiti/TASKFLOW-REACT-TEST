@@ -16,7 +16,20 @@ export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async () => {
     return response.data;
 });
 
+export const addTask = createAsyncThunk('tasks/addTask', async (task: Omit<TaskType, "_id">) => {
+    const response = await axios.post(`${process.env.API_URL}/tasks`, task);
+    return response.data;
+});
 
+export const deleteTask = createAsyncThunk('tasks/deleteTask', async(id: number) => {
+    const response = await axios.delete(`${process.env.API_URL}/tasks/${id}`);
+    return response.data;
+});
+
+export const updateTask = createAsyncThunk('tasks/updateTask', async(task: TaskType) => {
+    const response = await axios.put(`${process.env.API_URL}/tasks/${task._id}`, task);
+    return response.data;
+});
 
 const taskSlice = createSlice({
     name: "tasks",
